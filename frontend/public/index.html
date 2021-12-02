@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+  <title>Berny Distribuidora</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet">
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <!--Slick slider css-->
+  <link rel="stylesheet" type="text/css" href="https://berny.mx/build/css/slick.css">
+  <link rel="stylesheet" type="text/css" href="https://berny.mx/assets/frontend/css/slick-theme.css">
+
+  <!-- Animate icon -->
+  <link rel="stylesheet" type="text/css" href="https://berny.mx/build/css/animate.css">
+
+  <!-- Themify icon -->
+  <link rel="stylesheet" type="text/css" href="https://berny.mx/build/css/themify-icons.css">
+
+  <!-- Bootstrap css -->
+  <link rel="stylesheet" type="text/css" href="https://berny.mx/build/css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="https://berny.mx/build/css/select2.css">
+  <!-- Theme css -->
+  <link rel="stylesheet" type="text/css" href="https://berny.mx/build/css/color1.css" media="screen" id="color">
+
+  <!-- Testimonials -->
+  <link rel="stylesheet" type="text/css" href="https://berny.mx/build/css/cliente-registrado.css">
+
+  <!-- </nav> -->
+  <style type="text/css">
+    /* -----------------------------------------
+   Dropdown
+	----------------------------------------- */
+    .dropdown-menu {
+      padding: 0 0 0 0;
+    }
+
+    a.dropdown-menu-header {
+      background: #f7f9fe;
+      font-weight: bold;
+      border-bottom: 1px solid #e3e3e3;
+    }
+
+    .dropdown-menu>li a {
+      padding: 10px 20px;
+    }
+
+    .fa-2x {
+      font-size: 1.2em;
+    }
+
+    .navbar-nav>.user-menu>.dropdown-menu>li.user-header {
+      height: 175px;
+      min-width: 279px;
+      padding: 10px;
+      text-align: center;
+    }
+
+    .navbar-nav>.user-menu>.dropdown-menu>li.user-header>img {
+      z-index: 5;
+      height: 90px;
+      width: 250px;
+      border: 3px solid;
+      border-color: transparent;
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .user-header {
+      padding: 10px !important;
+    }
+
+    @media screen and (max-width: 768px) {
+      .navbar-nav>.user-menu>.dropdown-menu>li.user-header {
+        height: 175px;
+        width: 100%;
+        padding: 10px;
+        text-align: center;
+      }
+    }
+
+    .img-circle {
+      border-radius: 50%;
+    }
+
+    .navbar-nav>.user-menu>.dropdown-menu>.user-body {
+      padding: 15px;
+      border-bottom: 1px solid #f4f4f4;
+      border-top: 1px solid #dddddd;
+    }
+
+    .navbar-nav>.user-menu>.dropdown-menu>.user-footer {
+      background-color: #f9f9f9;
+      padding: 10px;
+    }
+
+    /*** Letter avatar */
+    .avatar {
+      width: 52px;
+      height: 52px;
+      background-color: #000;
+      border-radius: 50%;
+      font-family: sans-serif;
+      color: #ffd500;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+
+    .avatar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .avatar {
+      width: 70px;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #000;
+      border-radius: 50%;
+      font-family: sans-serif;
+      color: #ffd500;
+      font-weight: bold;
+      font-size: 20px;
+      position: relative;
+    }
+
+    .bg-success {
+      /* background-color: #FF851B !important; */
+      background-color: #ffd500 !important;
+      color: white;
+    }
+
+    .badge {
+      padding: 3px 5px 2px;
+      position: absolute;
+      top: 8px;
+      right: 5px;
+      display: inline-block;
+      min-width: 10px;
+      font-size: 9px;
+      font-weight: bold;
+      /* color: #ffffff; */
+      line-height: 1;
+      vertical-align: baseline;
+      white-space: nowrap;
+      text-align: center;
+      border-radius: 10px;
+      background: red;
+    }
+
+    .dropdown-toggle::after {
+      display: none;
+
+    }
+
+    .main-menu .menu-right .icon-nav .onhover-div .show-div.setting {
+      padding: 15px 20px 20px;
+      min-width: 230px;
+      right: 0;
+      left: unset;
+    }
+
+    @-webkit-keyframes ring {
+      0% {
+        -webkit-transform: rotate(-15deg);
+        transform: rotate(-15deg);
+      }
+
+      2% {
+        -webkit-transform: rotate(15deg);
+        transform: rotate(15deg);
+      }
+
+      4% {
+        -webkit-transform: rotate(-18deg);
+        transform: rotate(-18deg);
+      }
+
+      6% {
+        -webkit-transform: rotate(18deg);
+        transform: rotate(18deg);
+      }
+
+      8% {
+        -webkit-transform: rotate(-22deg);
+        transform: rotate(-22deg);
+      }
+
+      10% {
+        -webkit-transform: rotate(22deg);
+        transform: rotate(22deg);
+      }
+
+      12% {
+        -webkit-transform: rotate(-18deg);
+        transform: rotate(-18deg);
+      }
+
+      14% {
+        -webkit-transform: rotate(18deg);
+        transform: rotate(18deg);
+      }
+
+      16% {
+        -webkit-transform: rotate(-12deg);
+        transform: rotate(-12deg);
+      }
+
+      18% {
+        -webkit-transform: rotate(12deg);
+        transform: rotate(12deg);
+      }
+
+      20% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+      }
+    }
+
+    @keyframes ring {
+      0% {
+        -webkit-transform: rotate(-15deg);
+        -ms-transform: rotate(-15deg);
+        transform: rotate(-15deg);
+      }
+
+      2% {
+        -webkit-transform: rotate(15deg);
+        -ms-transform: rotate(15deg);
+        transform: rotate(15deg);
+      }
+
+      4% {
+        -webkit-transform: rotate(-18deg);
+        -ms-transform: rotate(-18deg);
+        transform: rotate(-18deg);
+      }
+
+      6% {
+        -webkit-transform: rotate(18deg);
+        -ms-transform: rotate(18deg);
+        transform: rotate(18deg);
+      }
+
+      8% {
+        -webkit-transform: rotate(-22deg);
+        -ms-transform: rotate(-22deg);
+        transform: rotate(-22deg);
+      }
+
+      10% {
+        -webkit-transform: rotate(22deg);
+        -ms-transform: rotate(22deg);
+        transform: rotate(22deg);
+      }
+
+      12% {
+        -webkit-transform: rotate(-18deg);
+        -ms-transform: rotate(-18deg);
+        transform: rotate(-18deg);
+      }
+
+      14% {
+        -webkit-transform: rotate(18deg);
+        -ms-transform: rotate(18deg);
+        transform: rotate(18deg);
+      }
+
+      16% {
+        -webkit-transform: rotate(-12deg);
+        -ms-transform: rotate(-12deg);
+        transform: rotate(-12deg);
+      }
+
+      18% {
+        -webkit-transform: rotate(12deg);
+        -ms-transform: rotate(12deg);
+        transform: rotate(12deg);
+      }
+
+      20% {
+        -webkit-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        transform: rotate(0deg);
+      }
+    }
+
+    .faa-ring.animated,
+    .faa-ring.animated-hover:hover,
+    .faa-parent.animated-hover:hover>.faa-ring {
+      -webkit-animation: ring 2s ease infinite;
+      animation: ring 2s ease infinite;
+      transform-origin-x: 50%;
+      transform-origin-y: 0px;
+      transform-origin-z: initial;
+    }
+
+    .dropdown-menu li a {
+      border-left: 0 !important;
+      color: #1b2161;
+    }
+
+    /* .swal2-popup {
+        font-size: 1.4rem !important;
+    } */
+  </style>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js" type="text/javascript"></script>
+<!-- <script src="https://berny.mx/assets/js/header.js?v=1344012386" type="text/javascript"></script> -->
+</head>
+
+<body>
+  <noscript>
+    <strong>We're sorry but frontend doesn't work properly without JavaScript enabled. Please enable it to
+      continue.</strong>
+  </noscript>
+  <div id="app"></div>
+  <!-- built files will be auto injected -->
+
+  <script type="text/javascript">
+    window.zESettings = {
+        webWidget: {
+            zIndex: 80,
+            color: {
+                theme: '#ffd500'
+            },
+            offset: {
+                vertical: '64px',
+                mobile: {
+                    vertical: '64px'
+                }
+            },
+            chat: {
+                connectOnPageLoad: false,
+                notifications: {
+                    mobile: {
+                        disable: true
+                    }
+                }
+            }
+        }
+    };
+</script>
+  <!-- <script src="https://berny.mx/assets/frontend/js/main.js"></script>
+  <script src="https://berny.mx/build/js/jquery-3.3.1.min.js"></script>
+  <script src="https://berny.mx/build/js/menu.js"></script>
+  <script src="https://berny.mx/build/js/lazysizes.min.js"></script>
+  <script src="https://berny.mx/build/js/popper.min.js"></script>
+  <script src="https://berny.mx/build/js/bootstrap.js"></script>
+  <script src="https://berny.mx/build/js/slick.js"></script>
+  <script src="https://berny.mx/build/js/script.js"></script> -->
+
+  <script src="https://berny.mx/assets/frontend/js/main.js"></script>
+    <!-- latest jquery-->
+    <script src="https://berny.mx/build/js/jquery-3.3.1.min.js"></script>
+
+    <!-- menu js-->
+    <script src="https://berny.mx/build/js/menu.js"></script>
+
+    <!-- lazyload js-->
+    <script src="https://berny.mx/build/js/lazysizes.min.js"></script>
+
+    <!-- popper js-->
+    <script src="https://berny.mx/build/js/popper.min.js"></script>
+
+    <!-- Bootstrap js-->
+    <script src="https://berny.mx/build/js/bootstrap.js"></script>
+
+    <!-- Bootstrap Notification js-->
+    <script src="https://berny.mx/build/js/bootstrap-notify.min.js"></script>
+
+    <!-- footer reveal js-->
+    <script src="https://berny.mx/build/js/footer-reveal.min.js"></script>
+    <!-- slick js-->
+    <script src="https://berny.mx/build/js/slick.js"></script>
+    <!-- Theme js-->
+    <script src="https://berny.mx/build/js/script.js"></script>
+
+    <script src="https://berny.mx/build/js/catalog.js"></script>
+    <script src="https://berny.mx/build/js/diseno.js"></script>
+
+</body>
+
+</html>
