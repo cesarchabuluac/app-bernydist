@@ -67,8 +67,12 @@
                                         <li><a href="https://berny.mx/" class="main-menu-item ">Inicio</a></li>
                                         <li><a href="https://berny.mx/tienda" class="main-menu-item ">Tienda</a></li>
 
-                                        <li><a href="https://berny.mx/pages/empresa" class="main-menu-item ">Nosotros</a></li>
-                                        <li><a href="https://berny.mx/pages/contacto" class="main-menu-item ">Contacto</a></li>
+                                        <li>
+                                            <router-link :to="{ path: '/pages/empresa' }">Nosotros</router-link>
+                                        </li>
+                                        <li>
+                                            <router-link :to="{ path: '/pages/contacto' }">Contacto</router-link>
+                                        </li>
                                         <li><a href="https://berny.mx/info/blog" class="main-menu-item ">Blog</a></li>
                                         <li><a href="https://berny.mx/info/faq" class="main-menu-item ">Ayuda</a></li>                                
                                         <li class="d-block d-xl-none">

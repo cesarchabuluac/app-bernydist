@@ -18,7 +18,7 @@ const router = new VueRouter({
 		},
 	
 		{
-			path: "/about",
+			path: "/pages/empresa",
 			name: "About",
 			component: About
 		},
@@ -28,7 +28,7 @@ const router = new VueRouter({
 			component: Careers
 		},
 		{
-			path: "/contact",
+			path: "/pages/contacto",
 			name: "Contact",
 			component: Contact
 		}
