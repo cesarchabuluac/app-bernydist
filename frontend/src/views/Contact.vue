@@ -1,13 +1,12 @@
 <template>
   <div>
       <div class="container">
-
             <div class="contenido-body">
                 <div class="container">
                     <div class="">
                         <div class="mt-5">
-                            <div class="col-xs-12 p-0">
-                                
+                            <div class="col-xs-12 p-0">                                
+                                <GoogleMap :latitude="latitude" :longitude="longitude" :title="title"/>
                             </div>
                         </div>
 
@@ -146,7 +145,18 @@
 </template>
 
 <script>
+import GoogleMap from "../components/GoogleMap.vue";
 export default {
+    components: {
+        GoogleMap
+    },
+    data () {
+        return {
+            latitude: 20.9900846,
+            longitude: -89.60697,
+            title: 'Berny Distribuidora'
+        }
+    }
 
 }
 </script>

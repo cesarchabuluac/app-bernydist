@@ -40,16 +40,14 @@
                                         <div class="icon-nav d-none d-xl-block">
                                             <!-- Horizontal menu -->
                                             <ul>
-                                                                                            <li class="mobile-account">
-                                                        <a class="btn btn-orange" href="https://berny.mx/pages/distributed">Quiero ser distribuidor</a>
-                                                    </li>
-                                                    <li class="onhover-div">
-                                                        <a href="https://berny.mx/pages/login" class="btn btn-main-menu-custom">
-                                                            <i class="fa fa-user"></i> Ingresar
-                                                        </a>
-                                                    </li>
-
-                                                
+                                                <li class="mobile-account">                                                    
+                                                     <router-link :to="{ path: '/pages/distributed' }" class="btn btn-orange">Quiero ser distribuidor</router-link>
+                                                </li>
+                                                <li class="onhover-div">
+                                                    <a href="https://berny.mx/pages/login" class="btn btn-main-menu-custom">
+                                                        <i class="fa fa-user"></i> Ingresar
+                                                    </a>
+                                                </li>                                                
                                             </ul>
                                         </div>
                                     </div>
@@ -64,7 +62,9 @@
                             <div class="main-nav-center">
                                 <nav id="main-nav">
                                     <ul id="main-menu" class="sm dark pixelstrap sm-horizontal">
-                                        <li><a href="https://berny.mx/" class="main-menu-item ">Inicio</a></li>
+                                        <li>                                            
+                                            <router-link :to="{ path: '/' }"  class="main-menu-item ">Inicio</router-link>
+                                        </li>
                                         <li><a href="https://berny.mx/tienda" class="main-menu-item ">Tienda</a></li>
 
                                         <li>
@@ -75,8 +75,8 @@
                                         </li>
                                         <li><a href="https://berny.mx/info/blog" class="main-menu-item ">Blog</a></li>
                                         <li><a href="https://berny.mx/info/faq" class="main-menu-item ">Ayuda</a></li>                                
-                                        <li class="d-block d-xl-none">
-                                            <a href="https://berny.mx/pages/distributed">Quiero ser distribuidor</a>
+                                        <li class="d-block d-xl-none">                                            
+                                            <router-link :to="{ path: '/pages/distributed' }">Quiero ser distribuidor</router-link>
                                         </li>                                
                                         <li><a href="https://berny.mx/pages/login" class="main-menu-item "><i class="fa fa-shopping-cart"></i> $0.00</a></li>
                                         <li class="d-xl-none d-lg-none d-md-block d-sm-block">
@@ -191,13 +191,21 @@
                 <a href="#" class="overlay"></a>
                 <nav>
                     <ul id="sub-menu" class="sm pixelstrap sm-vertical" style="background-color: black; margin-top: 24px;">
-                        <li><a href="https://berny.mx/" class="main-menu-item ">Inicio</a></li>
+                        <li>                            
+                            <router-link :to="{ path: '/' }"  class="main-menu-item ">Inicio</router-link>
+                        </li>
                         <li><a href="https://berny.mx/tienda" class="main-menu-item ">Tienda</a></li>
-                        <li><a href="https://berny.mx/pages/empresa" class="main-menu-item ">Nosotros</a></li>
-                        <li><a href="https://berny.mx/pages/contacto" class="main-menu-item ">Contacto</a></li>
+                        <li>                            
+                            <router-link :to="{ path: '/pages/nosotros' }"  class="main-menu-item ">Nosotros</router-link>
+                        </li>
+                        <li>                            
+                            <router-link :to="{ path: '/pages/contacto' }"  class="main-menu-item ">Contacto</router-link>
+                        </li>
                         <li><a href="https://berny.mx/info/blog" class="main-menu-item ">Blog</a></li>
                         <li><a href="https://berny.mx/info/faq" class="main-menu-item ">Ayuda</a></li>
-                        <li class="d-block d-xl-none"><a href="pages/distributed">Quiero ser distribuidor</a></li>
+                        <li class="d-block d-xl-none">                            
+                            <router-link :to="{ path: '/pages/distributed' }">Quiero ser distribuidor</router-link>
+                        </li>
                         <li><a href="https://berny.mx/pages/login/general" class="main-menu-item "><i class="fa fa-shopping-cart"></i> $0.00</a></li>
                         <li><a href="https://berny.mx/pages/login" class="main-menu-item"><i class="fa fa-user"></i> Ingresar</a></li>
                     </ul>
@@ -231,7 +239,9 @@
                                 </div>
                                 <div class="footer-contant">
                                     <ul>
-                                        <li><a href="https://berny.mx/">Inicio</a></li>
+                                        <li>
+                                            <router-link :to="{ path: '/' }">Inicio</router-link>
+                                        </li>
                                         <li><a href="https://berny.mx/tienda">Tienda</a></li>
                                         <li><a href="https://berny.mx/info/blog">Blog</a></li>
                                         <li><a href="https://berny.mx/info/faq">Ayuda</a></li>
@@ -248,8 +258,12 @@
                                 <div class="footer-contant">
                                     <ul>
                                         <li><a href="https://berny.mx/pages/privacidad" target="_blank">Aviso de Privacidad</a></li>
-                                        <li><a href="https://berny.mx/pages/contacto/">Contacto</a></li>
-                                        <li><a href="https://berny.mx/pages/empresa/">Empresa</a></li>
+                                        <li>
+                                            <router-link :to="{ path: '/pages/contacto' }">Contacto</router-link>
+                                        </li>
+                                        <li>                                            
+                                            <router-link :to="{ path: '/pages/empresa' }">Empresa</router-link>
+                                        </li>
                                         <li><a href="https://berny.mx/pages/folleto">Catálogo</a></li>
                                         <li><a href="https://webmail1.hostinger.mx/">Webmail</a></li>
                                     </ul>

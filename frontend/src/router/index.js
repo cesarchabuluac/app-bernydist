@@ -5,7 +5,7 @@ Vue.use(VueRouter)
 import About from "../views/About.vue";
 import Home from "../views/Home.vue";
 import Contact from "../views/Contact.vue";
-import Careers from "../views/Careers.vue";
+// import Distributed from "../views/Distributed.vue";
 
 const router = new VueRouter({
 	mode: 'history',
@@ -21,17 +21,17 @@ const router = new VueRouter({
 			path: "/pages/empresa",
 			name: "About",
 			component: About
-		},
-		{
-			path: "/careers",
-			name: "Careers",
-			component: Careers
-		},
+		},		
 		{
 			path: "/pages/contacto",
 			name: "Contact",
 			component: Contact
-		}
+		},
+		// {
+		// 	path: "/pages/distributed",
+		// 	name: "distributed",
+		// 	component: Distributed
+		// }
 	]
 })
 
