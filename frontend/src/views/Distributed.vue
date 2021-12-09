@@ -1,5 +1,7 @@
 <template>
     <div>
+       
+
          <!--section start-->
         <section class="register-page section-b-space">
             <div class="container">
@@ -13,13 +15,13 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="name">Nombre Completo</label>
-                                                <input type="text" class="form-control" id="name" name="name" placeholder="Nombre Completo" required>
+                                                <input v-model="user.name" type="text" class="form-control" id="name" name="name" placeholder="Nombre Completo" required>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="email">Correo Eléctronico</label>
-                                                <input id="email" name="email" type="email" class="form-control" placeholder="Correo Eléctronico" required>
+                                                <input v-model="user.email" id="email" name="email" type="email" class="form-control" placeholder="Correo Eléctronico" required>
                                             </div>
                                         </div>
                                     </div>
@@ -27,13 +29,13 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="phone">Teléfono (*)</label>
-                                                <input id="phone" name="phone" type="tel" class="form-control" autocomplete="off" maxlength="10" min="0" placeholder="Teléfono" required>
+                                                <input v-model="user.phone" id="phone" name="phone" type="tel" class="form-control" autocomplete="off" maxlength="10" min="0" placeholder="Teléfono" required>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="postal_code">Código postal (*)</label>
-                                                <input id="postal_code" name="postal_code" type="text" class="form-control" autocomplete="off" maxlength="10" min="0" placeholder="Código postal" required>
+                                                <input v-model="user.postal_code" id="postal_code" name="postal_code" type="text" class="form-control" autocomplete="off" maxlength="10" min="0" placeholder="Código postal" required>
                                                 <div id="postal-code-error" class="help-block has-error"></div>
                                             </div>
                                         </div>
@@ -42,13 +44,13 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="states">Estado</label>
-                                                <input type="text" name="states" id="states" autocomplete="off" class="form-control" placeholder="Estado" required readonly>
+                                                <input v-model="user.states" type="text" name="states" id="states" autocomplete="off" class="form-control" placeholder="Estado" required readonly>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="municipality">Delegación / Municipio (*)</label>
-                                                <input type="text" name="municipality" id="municipality" autocomplete="off" class="form-control" placeholder="Delegación" required readonly>
+                                                <input v-model="user.municipality" type="text" name="municipality" id="municipality" autocomplete="off" class="form-control" placeholder="Delegación" required readonly>
                                             </div>
                                         </div>
                                     </div>
@@ -96,7 +98,7 @@
                                         <input type="hidden" name="latitude" id="latitude" value="0">
                                         <input type="hidden" name="longitude" id="longitude" value="0">
                                         <input type="hidden" name="is_new_location" id="is_new_location" value="0">
-                                        <button id="btn_register" name="btn_register" type="button" class="btn btn_register btn-solid">Registrar</button>
+                                        <button @click.prevent="register" id="btn_register" name="btn_register" type="button" class="btn btn_register btn-solid">Registrar</button>
                                     </div>
                                 </div>
                             </form>
@@ -106,8 +108,8 @@
             </div>
         </section>
         <!--Section ends-->
-
-         <section class="register-page section-b-space">
+         
+        <section class="register-page section-b-space">
             <div class="container">
                 <div class="row">
                     <div class="col-md-4">
@@ -146,8 +148,7 @@
                         <h3>¿Necesitas ayuda para registrarte?</h3>
                         <p>- Completa tu registro en 5 minutos, haz clic para ver el video</p>
                         <div class="embed-responsive embed-responsive-16by9">
-                            <!-- <iframe class="embed-responsive-item" src="<?= URL_VIDEO_DISTRIBUIDOR ?>" frameborder="0" allowfullscreen=""></iframe> -->
-                             <!-- <LazyYoutube src="https://www.youtube.com/watch?v=TcMBFSGVi1c" /> -->
+                            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/RhHRLWISDYU" frameborder="0" allowfullscreen=""></iframe>
                         </div>                        
                     </div>
                 </div>               
@@ -157,11 +158,72 @@
 </template>
 
 <script>
+import axios from 'axios'
+import _ from 'lodash'
+import LocationProvider from "@/providers/Locations";
+const LocationResource = new LocationProvider();
+
 export default {
     data() {
         return {
-            isDistributed: false,
+            show: false,
+            loading: false,
+            tokenSepomex: `cdcb3106-ebe5-44ce-a2cb-9a36830d4d26`,
+            user: {
+                postal_code: 97370
+            },
+            postalCodes: [],
+            locations: [],
         }
     },
+    methods: {
+        onShown() {
+            // Focus the cancel button when the overlay is showing
+            this.$refs.cancel.focus()
+        },
+        onHidden() {
+            // Focus the show button when the overlay is removed
+            this.$refs.show.focus()
+        },
+        async validPostalCode () {
+            this.locations = []
+            this.loading = true
+            try {
+
+                
+                
+                const API_SEPOMEX = `https://api-sepomex.hckdrk.mx/query/info_cp/${this.user.postal_code}?token=${this.tokenSepomex}`                             
+                const { data } = await axios.get(API_SEPOMEX)                
+                const firstItem = _.first(data)
+                if (!firstItem.error) {
+                    
+                    const query = {
+                        name_state: firstItem.response.estado,
+                        name_city: firstItem.response.municipio
+                    }
+
+                    const { data } = await LocationResource.findByCity(query)
+                    this.loading = false
+                    this.locations = data.data
+                   
+                } else {
+                    this.danger(firstItem.error_message)
+                }
+
+            } catch(error) {    
+                this.loading = false
+                let errors = Object.values(error);                
+			    errors = errors.flat();                
+                if (errors[2]) {
+                    this.danger(errors[2].data.error_message)
+                } else {
+                    this.handleResponseErrors(error)
+                }
+            }
+        },
+        register () {
+           this.validPostalCode()
+        },
+    }
 }
 </script>
