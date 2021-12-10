@@ -3,6 +3,11 @@ import App from "./App.vue";
 import router from "./router";
 import * as VueGoogleMaps from "vue2-google-maps";
 
+import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+
+// Import Bootstrap an BootstrapVue CSS files (order is important)
+// import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 //Sweet alert
 import VueSweetalert2 from 'vue-sweetalert2';
@@ -20,6 +25,11 @@ Vue.use(VueGoogleMaps, {
 		key: "AIzaSyC0lnIcO0oeG0hMl0hgG_DK_xfNRCUGwpA"
 	}
 });
+
+// Make BootstrapVue available throughout your project
+Vue.use(BootstrapVue)
+// Optionally install the BootstrapVue icon components plugin
+Vue.use(IconsPlugin)
 
 Vue.use(VueSweetalert2);
 Vue.mixin(http);
