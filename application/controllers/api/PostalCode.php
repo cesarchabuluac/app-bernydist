@@ -31,7 +31,8 @@ class PostalCode extends \Restserver\Libraries\REST_Controller
         $this->methods['destroy_delete']['limit'] = 50; // 50 requests per hour per user/key
     }
 
-    public function index_get() {
+    public function index_get()
+    {
         $cp = $this->input->get('cp', TRUE);
         $postal_codes = array();
         if (!empty($cp)) {
@@ -46,35 +47,49 @@ class PostalCode extends \Restserver\Libraries\REST_Controller
             'data' => $postal_codes
         ), \Restserver\Libraries\REST_Controller::HTTP_OK);
     }
-    
-    public function store_post() {
+
+    public function show_get()
+    {
+        $cp = $this->input->get('cp', TRUE);
+        $postal_code = $this->db->query("SELECT * FROM postal_codes WHERE cp='{$cp}'")->row();
+        if (empty($postal_code)) {
+            $this->response(array(
+                'status' => false,
+                'message' => 'postal code not found',
+                'data' => []
+            ), \Restserver\Libraries\REST_Controller::HTTP_OK);
+        } else {
+            $this->response(array(
+                'status' => true,
+                'message' => 'postal code retrieved sucessfully',
+                'data' => $postal_code
+            ), \Restserver\Libraries\REST_Controller::HTTP_OK);
+        }
+    }
+
+    public function store_post()
+    {
 
         $parameters = json_decode(file_get_contents('php://input'), true);
 
-        $this->response(array(
-            'status' => true,
-            'message' => 'postal codes retrieved sucessfully',
-            'data' => $parameters['codes']
-        ), \Restserver\Libraries\REST_Controller::HTTP_OK);
+        if (!empty($parameters)) {
+            $data = $this->db->insert_batch('postal_codes', $parameters);
 
-        // $codes = json_decode($request->codes, true);
-        // collect($codes)->each(function ($items){
-        //     PostalCode::updateOrCreate([
-        //         'cp' => $items['cp'],
-        //         'settlement' =>  $items['settlement'],
-        //         'settlement_type' =>  $items['settlement_type'],
-        //         'municipality' =>  $items['municipality'],
-        //         'state' =>  $items['state'],
-        //         'city' =>  $items['city'],
-        //         'country' =>  $items['country']
-        //     ]);
-        // });
-
-
+            $this->response(array(
+                'status' => true,
+                'message' => 'postal codes saved sucessfully',
+                'data' => $data
+            ), \Restserver\Libraries\REST_Controller::HTTP_OK);
+        } else {
+            $this->response(array(
+                'status' => false,
+                'message' => 'postal codes retrieved sucessfully',
+                'data' => []
+            ), \Restserver\Libraries\REST_Controller::HTTP_OK);
+        }
     }
 
-    public function destroy_delete() {
-
+    public function destroy_delete()
+    {
     }
-    
 }

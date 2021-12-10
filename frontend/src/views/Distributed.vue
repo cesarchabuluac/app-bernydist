@@ -13,13 +13,13 @@
                                         <div class="form-row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="name">Nombre Completo</label>
+                                                    <label for="name">Nombre Completo (*)</label>
                                                     <input v-model="user.name" type="text" class="form-control" id="name" name="name" placeholder="Nombre Completo" required>                                                     
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="email">Correo Eléctronico</label>
+                                                    <label for="email">Correo Eléctronico (*)</label>
                                                     <input v-model="user.email" id="email" name="email" type="email" class="form-control" placeholder="Correo Eléctronico" required>
                                                 </div>
                                             </div>
@@ -34,7 +34,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="postal_code">Código postal (*)</label>
-                                                    <input v-model="user.postal_code" id="postal_code" name="postal_code" type="text" class="form-control" autocomplete="off" maxlength="10" min="0" placeholder="Código postal" required>
+                                                    <input v-model="user.postal_code" @blur.prevent="validPostalCode" id="postal_code" name="postal_code" type="text" class="form-control" autocomplete="off" maxlength="10" min="0" placeholder="Código postal" required>
                                                     <div id="postal-code-error" class="help-block has-error"></div>
                                                 </div>
                                             </div>
@@ -42,7 +42,7 @@
                                         <div class="form-row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="state">Estado</label>
+                                                    <label for="state">Estado (*)</label>
                                                     <input v-model="user.state" type="text" name="state" id="state" autocomplete="off" class="form-control" placeholder="Estado" required readonly>
                                                 </div>
                                             </div>
@@ -53,11 +53,11 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div v-if="isNewLocation === false" class="form-row">
+                                        <div v-if="!isNewLocation" class="form-row">
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label for="location">Localidad / Población (*)</label>
-                                                    <select name="location" id="location" class="form-control" style="padding: 0px 8px; height: 45px;" required>
+                                                    <select v-model="user.location" name="location" id="location" class="form-control" style="padding: 0px 8px; height: 45px;" required>
                                                         <option value="">Selecciona una opción</option>
                                                         <option v-for="(item, index) in locations" :key="index" :value="item.LOCALIDAD_ID">{{item.NOMBRE_LOCALIDAD}}</option>
                                                     </select>
@@ -73,8 +73,10 @@
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label for="location">Localidad / Población (*)</label>
-                                                    <input type="text" id="new_location_name" name="new_location_name" class="form-control" placeholder="Nueva localidad o población">
-                                                    <div class="help-block">Mostrar lista de localidades o poblaciones <a href="javascript:void(0)" id="show_list_location" name="show_list_location">Click aqui</a></div>
+                                                    <input v-model="user.new_location" type="text" class="form-control" placeholder="Nueva localidad o población">
+                                                    <div class="help-block">Mostrar lista de localidades o poblaciones 
+                                                        <a href="javascript:void(0)" @click="showLocations">Click aqui</a>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -84,20 +86,16 @@
                                         <div class="form-row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="password">Contraseña</label>
-                                                    <input type="password" class="form-control" id="password" name="password" placeholder="Contraseña" required>
+                                                    <label for="password">Contraseña (*)</label>
+                                                    <input v-model="user.password" type="password" class="form-control"  id="password" name="password" placeholder="Contraseña" required>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="confirm_password">Confirmar contraseña</label>
-                                                    <input id="confirm_password" name="confirm_password" type="password" class="form-control" placeholder="Confirmar contraseña" required>
+                                                    <label for="confirm_password">Confirmar contraseña (*)</label>
+                                                    <input v-model="user.confirm_password" type="password" class="form-control" placeholder="Confirmar contraseña" required>
                                                 </div>
                                             </div>
-                                            <input type="hidden" name="register" id="register" value="register">
-                                            <input type="hidden" name="latitude" id="latitude" value="0">
-                                            <input type="hidden" name="longitude" id="longitude" value="0">
-                                            <input type="hidden" name="is_new_location" id="is_new_location" value="0">
                                             <button @click.prevent="register" id="btn_register" name="btn_register" type="button" class="btn btn_register btn-solid">Registrar</button>
                                         </div>
                                     </div>
@@ -169,65 +167,160 @@
 import axios from 'axios'
 import _ from 'lodash'
 import LocationProvider from "@/providers/Locations";
+import PostalCodeProvider from '@/providers/PostalCodes'
+
 const LocationResource = new LocationProvider();
+const PostalCodeResource = new PostalCodeProvider();
 
 export default {
     data() {
         return {
             loading: false,
             tokenSepomex: `cdcb3106-ebe5-44ce-a2cb-9a36830d4d26`,
-            user: {
-                postal_code: 97370
-            },
+            user: {},
             postalCodes: [],
             locations: [],
-            isNewLocation: false
+            isNewLocation: false,
+            error: 0,
+            errorMessages: [],
         }
+    },
+    computed: {
+    
     },
     methods: {       
         async validPostalCode () {
-            this.locations = []
-            this.loading = true
-            try {                
+            if (this.user.postal_code) {
+                this.locations = []
+                this.user.new_location = null
+                this.user.state = null
+                this.user.municipality = null
+                this.user.location = null
+                this.loading = true
 
-                const API_SEPOMEX = `https://api-sepomex.hckdrk.mx/query/info_cp/${this.user.postal_code}?token=${this.tokenSepomex}`                             
-                const { data } = await axios.get(API_SEPOMEX)                
-                const firstItem = _.first(data)
-                if (!firstItem.error) {
+                let query = {}
+                try {
                     
-                    this.user.state = firstItem.response.estado
-                    this.user.municipality = firstItem.response.municipio
-                    const query = {
-                        name_state: firstItem.response.estado,
-                        name_city: firstItem.response.municipio
+                    let { data } = await PostalCodeResource.find(this.user.postal_code)
+                    if (!data.status) {
+                        
+                        const API_SEPOMEX = `https://api-sepomex.hckdrk.mx/query/info_cp/${this.user.postal_code}?token=${this.tokenSepomex}`                             
+                        const { data } = await axios.get(API_SEPOMEX) 
+                        const firstItem = _.first(data) 
+                        const bulkData = []
+                        
+                        data.forEach(element => {
+                            bulkData.push({
+                                cp: element.response.cp,
+                                settlement: element.response.asentamiento,
+                                settlement_type: element.response.tipo_asentamiento,
+                                municipality: element.response.municipio,
+                                state: element.response.estado,
+                                city: element.response.ciudad,
+                                country: element.response.pais
+                            })
+                        });    
+                        
+                        if (!firstItem.error) {
+                            
+                            this.user.state = firstItem.response.estado
+                            this.user.municipality = firstItem.response.municipio
+                            query = {
+                                name_state: firstItem.response.estado,
+                                name_city: firstItem.response.municipio
+                            }
+
+                            //Bulk Insert to database local
+                            PostalCodeResource.store(bulkData)
+                            
+                        } else {
+                            this.danger(firstItem.error_message)
+                        } 
+                        
+                    } else {
+                        
+                        this.user.state = data.data.state
+                        this.user.municipality = data.data.municipality
+
+                        query = {
+                            name_state: data.data.state,
+                            name_city: data.data.municipality
+                        };
+                        
                     }
-
-                    const { data } = await LocationResource.findByCity(query)
+                    
+                    // const params = query;
+                    LocationResource.findByCity(query).then(response => {
+                        this.loading = false
+                        if (response.status) {
+                            this.locations = response.data.data
+                        } else {
+                            this.danger(response.data.message)
+                        }
+                    }).catch(err => {
+                        this.loading = false
+                        let errors = Object.values(err);                
+                        errors = errors.flat();                
+                        if (errors[2]) {
+                            this.danger(errors[2].data.error_message)
+                        } else {
+                            this.handleResponseErrors(err)
+                        }
+                    })
+                    
+                } catch(error) {   
                     this.loading = false
-                    this.locations = data.data
-
-                    console.log(this.locations)
-                   
-                } else {
-                    this.danger(firstItem.error_message)
-                }
-
-            } catch(error) {    
-                this.loading = false
-                let errors = Object.values(error);                
-			    errors = errors.flat();                
-                if (errors[2]) {
-                    this.danger(errors[2].data.error_message)
-                } else {
-                    this.handleResponseErrors(error)
+                    let errors = Object.values(error);                
+                    errors = errors.flat();                
+                    if (errors[2]) {
+                        this.danger(errors[2].data.error_message)
+                    } else {
+                        this.handleResponseErrors(error)
+                    }
                 }
             }
         },
+        validForm () {
+            this.error = 0;
+		    this.errorMessages = [];
+            
+            if (!this.user.name){this.errorMessages.push("El nombre es requerido.");}
+            if (!this.user.email){this.errorMessages.push("El correo es requerido.");}
+            if (!this.user.phone){this.errorMessages.push("El teléfono es requerido.");}		
+            if (!this.user.postal_code){this.errorMessages.push("El código postal es requerido");}
+            if (!this.user.state){this.errorMessages.push("El estado es requerido");}
+            if (!this.user.municipality){this.errorMessages.push("La delegación/municipio es requerido");}
+            if (!this.user.password){this.errorMessages.push("La contraseña es requerido");}
+            // if (!this.user.password.length <= 5){this.errorMessages.push("La longitud de la contraseña es corta, debe tener almenos 5 caracteres (Alfanumerico)");}
+            if (this.user.password != this.user.confirm_password){this.errorMessages.push("La confirmación de la contraseña no coincide");}
+
+            if (!this.user.location || !this.user.new_location) {
+                this.errorMessages.push("La localidad es requerido");
+            }
+
+            if (this.errorMessages.length) {
+                this.error = 1;
+                this.danger(' (*) Campos requeridos')
+                return this.error;
+            }
+            
+
+        },
         register () {
-           this.validPostalCode()
+           this.validForm()
+
+           console.log(this.user)
+
         },
         showNewLocation () {
+            this.locations = []
+            this.user.location = null
+            this.user.new_location = null
             this.isNewLocation = true
+        },
+        showLocations () {
+            this.isNewLocation = false
+            this.validPostalCode()
         }
     }
 }

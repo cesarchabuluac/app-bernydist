@@ -38,8 +38,6 @@ class Location extends \Restserver\Libraries\REST_Controller
         $nameCity = sanear_string($this->input->get('name_city', TRUE));
         $dataState = $this->db->query("SELECT * FROM `_ESTADOS` e WHERE e.NOMBRE='{$nameState}'")->row();
         
-       
-
         if (!empty($dataState)) {
             $city = $this->db->query("SELECT CIUDAD_ID FROM _CIUDADES WHERE NOMBRE LIKE '%" . strtoupper($nameCity) . "%' AND ESTADO_ID = {$dataState->ESTADO_ID} LIMIT 1")->row();            
             $locations = $this->db->query("SELECT * FROM _LOCALIDADES WHERE CIUDAD_ID = {$city->CIUDAD_ID}")->result();
