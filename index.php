@@ -290,6 +290,48 @@ if (!isset($view_folder[0]) && is_dir(APPPATH . 'views' . DIRECTORY_SEPARATOR)) 
 
 define('VIEWPATH', $view_folder . DIRECTORY_SEPARATOR);
 
+
+$url_servicio = "";
+$urlApi = "";
+
+switch ($_SERVER['SERVER_NAME']) {
+	case 'localhost':
+		$url_servicio = "http://192.168.2.2/servicioweb/spedidos.asmx";
+		// $urlApi = "http://192.168.2.3:8301/api/apitest/index.php/";
+		//'http://fhbernymid.aitelecom.net:98/api/apitest/index.php/Api/',
+		break;	
+	
+	default:
+		$url_servicio="http://fhbernymid.aitelecom.net:99/servicioweb/spedidos.asmx?";
+		// $urlApi = "http://192.168.2.3:8301/api/apitest/index.php/";
+		break;
+}
+
+switch (ENVIRONMENT) {
+	case 'development':
+		if ($_SERVER['SERVER_NAME'] == 'localhost') {
+			$urlApi = "http://192.168.2.3:8301/api/apitest/index.php/";
+		} else {
+			$urlApi = "http://fhbernymid.aitelecom.net:98/api/apitest/index.php/";
+		}		
+		break;	
+	default:
+		$urlApi = "http://fhbernymid.aitelecom.net:98/api/index.php/";
+		break;
+}
+
+define('URL_API_CUSTOMER', $urlApi);
+define('URL_APP_SERVICIO', $url_servicio);
+define('URL_APP_CATALOGO', 'https://www.yumpu.com/es/embed/view/mkT3DYhgqvV5cdXt');
+
+//Notificaciones con copia
+define('VALIDATE_NOTIFICATION_EMAIL_ADDRESS', array('fberny@berny.mx', 'ivillarino@berny.mx', 'caguilar@berny.mx', 'mcanto@berny.mx', 'jlizama@berny.mx', 'mlopez@berny.mx', 'hberny@berny.mx', 'cchab@berny.mx'));
+define('NOTIFICATION_EMAIL_PAYMENT_CUSTOMER_GENERAL', array('fberny@berny.mx', 'caguilar@berny.mx', 'mcanto@berny.mx', 'jlizama@berny.mx', 'mlopez@berny.mx', 'hberny@berny.mx', 'ivillarino@berny.mx', 'randrade@berny.mx', 'cchab@berny.mx'));
+define('NOTIFICATION_EMAIL_ACTIVATED_ACCOUNT', array('fberny@berny.mx', 'mcanto@berny.mx', 'ivillarino@berny.mx', 'caguilar@berny.mx', 'jlizama@berny.mx', 'mlopez@berny.mx', 'hberny@berny.mx', 'cchab@berny.mx'));
+define('NOTIFICATION_EMAIL_CLARIFICATIONS', array('fberny@berny.mx', 'caguilar@berny.mx', 'acan@berny.mx', 'jlizama@berny.mx', 'mlopez@berny.mx', 'hberny@berny.mx', 'ivillarino@berny.mx', 'cchab@berny.mx'));
+
+
+
 /*
  * --------------------------------------------------------------------
  * LOAD THE BOOTSTRAP FILE

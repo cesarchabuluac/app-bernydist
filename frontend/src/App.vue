@@ -44,9 +44,7 @@
                                                      <router-link :to="{ path: '/pages/distributed' }" class="btn btn-orange">Quiero ser distribuidor</router-link>
                                                 </li>
                                                 <li class="onhover-div">
-                                                    <a href="https://berny.mx/pages/login" class="btn btn-main-menu-custom">
-                                                        <i class="fa fa-user"></i> Ingresar
-                                                    </a>
+                                                    <router-link :to="{ path: '/pages/login' }" class="btn btn-main-menu-custom">  <i class="fa fa-user"></i> Ingresar</router-link>
                                                 </li>                                                
                                             </ul>
                                         </div>
@@ -80,7 +78,7 @@
                                         </li>                                
                                         <li><a href="https://berny.mx/pages/login" class="main-menu-item "><i class="fa fa-shopping-cart"></i> $0.00</a></li>
                                         <li class="d-xl-none d-lg-none d-md-block d-sm-block">
-                                            <a href="https://berny.mx/pages/login" class="main-menu-item "> Ingresar</a>
+                                            <router-link :to="{ path: '/pages/login' }"  class="main-menu-item ">Ingresar</router-link>
                                         </li>
                                         <li>
                                             <a href="#" class="modal-video" title="Como realizar tu primera compra." data-toggle="modal" data-target="#modal-video"><i class="fa fa-2x fa-play-circle"></i></a>
@@ -207,7 +205,9 @@
                             <router-link :to="{ path: '/pages/distributed' }">Quiero ser distribuidor</router-link>
                         </li>
                         <li><a href="https://berny.mx/pages/login/general" class="main-menu-item "><i class="fa fa-shopping-cart"></i> $0.00</a></li>
-                        <li><a href="https://berny.mx/pages/login" class="main-menu-item"><i class="fa fa-user"></i> Ingresar</a></li>
+                        <li>                            
+                            <router-link :to="{ path: '/pages/login' }"  class="main-menu-item ">Ingresar</router-link>
+                        </li>
                     </ul>
                     <div>
                         <div class="sidebar-back text-left">

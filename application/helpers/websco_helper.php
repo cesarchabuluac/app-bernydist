@@ -416,7 +416,7 @@ function callApi($url, $payload)
 	$return = curl_exec($process);
 	curl_close($process);
 	list($header, $body) = explode("\r\n\r\n", $return, 2);
-	return  json_decode($body);	
+	return  json_decode($body);
 }
 
 
