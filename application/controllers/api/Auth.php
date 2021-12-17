@@ -31,7 +31,29 @@ class Auth extends \Restserver\Libraries\REST_Controller
         $this->methods['destroy_delete']['limit'] = 50; // 50 requests per hour per user/key
     }
 
-    public function login_post() {
+    /**
+     * Index method for completeness. Returns a JSON response with an
+     * error message.
+     */
+    public function index_get()
+    {
+        header('Content-Type: application/json');
+        echo json_encode(array(
+            "code" => BAD_DATA,
+            "message" => "No resource specified."
+        ));
+    }
+
+    public function login_post()
+    {
+        // header('Content-Type: application/json');
+        // if ($this->input->method(true) != 'POST') {
+        //     echo json_encode(array("message:" => "Use the HTTP POST method to login to the system."));
+        //     return;
+        // } else{
+          
+        // }
+
         
     }
 }

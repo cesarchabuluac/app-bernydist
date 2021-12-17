@@ -330,8 +330,6 @@ define('NOTIFICATION_EMAIL_PAYMENT_CUSTOMER_GENERAL', array('fberny@berny.mx', '
 define('NOTIFICATION_EMAIL_ACTIVATED_ACCOUNT', array('fberny@berny.mx', 'mcanto@berny.mx', 'ivillarino@berny.mx', 'caguilar@berny.mx', 'jlizama@berny.mx', 'mlopez@berny.mx', 'hberny@berny.mx', 'cchab@berny.mx'));
 define('NOTIFICATION_EMAIL_CLARIFICATIONS', array('fberny@berny.mx', 'caguilar@berny.mx', 'acan@berny.mx', 'jlizama@berny.mx', 'mlopez@berny.mx', 'hberny@berny.mx', 'ivillarino@berny.mx', 'cchab@berny.mx'));
 
-
-
 /*
  * --------------------------------------------------------------------
  * LOAD THE BOOTSTRAP FILE
