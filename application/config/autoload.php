@@ -89,7 +89,7 @@ $autoload['drivers'] = array();
 |
 |	$autoload['helper'] = array('url', 'file');
 */
-$autoload['helper'] = array('websco_helper','url','text', 'jwt');
+$autoload['helper'] = array('websco_helper','url','text');
 
 /*
 | -------------------------------------------------------------------

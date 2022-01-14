@@ -1,0 +1,7 @@
+2021-12-17 18:18:32 => Query getDesctoArtCli : CALL getDesctoArtCli('104108308', 102453917, '2021-12-17', '103464273', 1, @test)
+2021-12-17 18:19:39 => Query getDesctoArtCli : CALL getDesctoArtCli('104108308', 102453917, '2021-12-17', '103464273', 1, @test)
+2021-12-17 18:22:40 => Query getDesctoArtCli : CALL getDesctoArtCli('104108308', 102453917, '2021-12-17', '103464273', 1, @test)
+2021-12-17 18:28:53 => Query getDesctoArtCli : CALL getDesctoArtCli('104108308', 102453917, '2021-12-17', '103464273', 1, @test)
+2021-12-17 18:50:45 => Query getDesctoArtCli : CALL getDesctoArtCli('104108308', 102453917, '2021-12-17', '103464273', 1, @test)
+2021-12-17 18:52:38 => Query getDesctoArtCli : CALL getDesctoArtCli('104108308', 102453917, '2021-12-17', '103464273', 1, @test)
+2021-12-17 18:52:59 => Query getDesctoArtCli : CALL getDesctoArtCli('104108308', 102453917, '2021-12-17', '103464273', 1, @test)
